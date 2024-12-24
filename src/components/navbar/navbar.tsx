@@ -6,6 +6,12 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import HouseIcon from '@mui/icons-material/House';
+import { Link } from 'react-router';
+
+const navLinkStyle = {
+  color: 'white',
+  textDecoration: 'none',
+};
 
 export default function Navbar() {
   return (
@@ -16,10 +22,12 @@ export default function Navbar() {
             size='large'
             edge='start'
             color='inherit'
-            aria-label='menu'
+            aria-label='home'
             sx={{ mr: 2 }}
           >
-            <HouseIcon />
+            <Link to='/' style={navLinkStyle}>
+              <HouseIcon />
+            </Link>
           </IconButton>
           <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
             Home Voyage

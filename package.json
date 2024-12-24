@@ -10,6 +10,7 @@
     "@mui/material": "^6.2.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-router": "^7.1.1",
     "react-scripts": "5.0.1",
     "typescript": "^5.7.2",
     "unsplash-js": "^7.0.19"
@@ -47,6 +48,7 @@
     "@types/node": "^22.10.2",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.2",
+    "@types/react-router": "^5.1.20",
     "@types/unsplash-js": "^7.0.0"
   }
 }
