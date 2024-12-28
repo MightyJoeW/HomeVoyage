@@ -26,10 +26,24 @@ describe('Navbar', () => {
         <Navbar />
       </BrowserRouter>
     );
-    const homeBtnLink = screen.getByRole('link');
+    const homeBtnLink = screen.getAllByRole('link')[0];
 
     expect(homeBtnLink).toHaveAttribute('href', '/');
     userEvent.click(homeBtnLink);
+    const url = window.location.pathname;
+    expect(url).toEqual('/');
+  });
+
+  it('should route to home when clicking the navbar Home Voyage text', () => {
+    render(
+      <BrowserRouter>
+        <Navbar />
+      </BrowserRouter>
+    );
+    const homeVoyageLink = screen.getByText('Home Voyage');
+
+    expect(homeVoyageLink).toHaveAttribute('href', '/');
+    userEvent.click(homeVoyageLink);
     const url = window.location.pathname;
     expect(url).toEqual('/');
   });

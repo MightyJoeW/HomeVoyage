@@ -30,7 +30,9 @@ export default function Navbar() {
             </Link>
           </IconButton>
           <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
-            Home Voyage
+            <Link to='/' style={navLinkStyle}>
+              Home Voyage
+            </Link>
           </Typography>
           <Button color='inherit'>Login</Button>
         </Toolbar>
