@@ -1,12 +1,25 @@
 import React, { FC, useEffect, useState } from 'react';
+import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid2';
+import Paper from '@mui/material/Paper';
 import { fetchPhotos } from '../../api/photos-api';
-import { Photo, ApiResponse } from '../../types/unsplash-response';
-import PhotoComp from '../photo-comp/photo-comp';
+import { Photo, HomeApiResponse } from '../../types/unsplash-response';
+import HomeCard from '../home-card/home-card';
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+  ...theme.applyStyles('dark', {
+    backgroundColor: '#1A2027',
+  }),
+}));
 
 const HomesDisplay: FC = () => {
-  const [data, setData] = useState<ApiResponse | null>(null);
+  const [data, setData] = useState<HomeApiResponse | null>(null);
 
   useEffect(() => {
     fetchPhotos('house')
@@ -14,13 +27,13 @@ const HomesDisplay: FC = () => {
         setData(result);
       })
       .catch(() => {
-        console.log('something went wrong!');
+        console.error('something went wrong!');
       });
   }, []);
 
   if (data === null) {
     return <div>Loading...</div>;
-  } else if (data.errors) {
+  } else if (data?.errors) {
     return (
       <div>
         <div>{data.errors[0]}</div>
@@ -31,9 +44,11 @@ const HomesDisplay: FC = () => {
     return (
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
-          {data.response.results.map((photo: Photo) => (
-            <Grid item key={photo.id}>
-              <PhotoComp photo={photo} />
+          {data?.response.results.map((photo: Photo) => (
+            <Grid key={photo.id}>
+              <Item>
+                <HomeCard photo={photo} />
+              </Item>
             </Grid>
           ))}
         </Grid>
