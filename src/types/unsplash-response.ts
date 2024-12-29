@@ -1,4 +1,4 @@
-export type Photo = {
+export interface Photo {
   id: number;
   width: number;
   height: number;
@@ -8,16 +8,16 @@ export type Photo = {
     username: string;
     name: string;
   };
-};
+}
 
-export type ApiResponse = {
-  originalResponse: object;
-  response: {
-    total: number;
-    total_pages: number;
-    results: Photo[];
-  };
-  status: number;
-  type: string;
+interface Results {
+  results: Photo[];
+}
+
+export interface HomeApiResponse {
+  total: number;
+  total_pages: number;
+  response: Results;
+  results: Photo[];
   errors?: string[];
-};
+}

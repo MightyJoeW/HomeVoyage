@@ -3,6 +3,7 @@
     "target": "es2023",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
+    "checkJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -14,7 +15,10 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "outDir": "dist",
+    "rootDir": "./src"
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["node_modules"]
 }
