@@ -1,11 +1,11 @@
-import React, { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid2';
 import Paper from '@mui/material/Paper';
-import { fetchPhotos } from '../../api/photos-api';
-import { Photo, HomeApiResponse } from '../../types/unsplash-response';
+import { HomeApiResponse } from '../../types/homes-types';
 import HomeCard from '../home-card/home-card';
+import { homesMockData } from '../../homes-mock-data';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#fff',
@@ -19,42 +19,21 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const HomesDisplay: FC = () => {
-  const [data, setData] = useState<HomeApiResponse | null>(null);
-
-  useEffect(() => {
-    fetchPhotos('house')
-      .then(result => {
-        setData(result);
-      })
-      .catch(() => {
-        console.error('something went wrong!');
-      });
-  }, []);
-
-  if (data === null) {
-    return <div>Loading...</div>;
-  } else if (data?.errors) {
-    return (
-      <div>
-        <div>{data.errors[0]}</div>
-        <div>PS: Make sure to set your access token!</div>
-      </div>
-    );
-  } else {
-    return (
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
-          {data?.response.results.map((photo: Photo) => (
+  return (
+    <Box sx={{ flexGrow: 1 }}>
+      <Grid container spacing={2}>
+        {Array.from(homesMockData).map(
+          (photo: HomeApiResponse, index: number) => (
             <Grid key={photo.id}>
               <Item>
                 <HomeCard photo={photo} />
               </Item>
             </Grid>
-          ))}
-        </Grid>
-      </Box>
-    );
-  }
+          )
+        )}
+      </Grid>
+    </Box>
+  );
 };
 
 const HomesFeed: FC = () => {
