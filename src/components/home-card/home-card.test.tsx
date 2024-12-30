@@ -17,7 +17,9 @@ describe('HomeCard', () => {
       screen.getByRole('link', { name: 'photo.description' })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole('link', { name: 'Photographer: Scott Webb' })
+      screen.getByRole('link', {
+        name: `Photographer: ${homesMockData[0].user.name}`,
+      })
     ).toBeInTheDocument();
   });
 });
