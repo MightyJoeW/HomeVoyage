@@ -3,6 +3,7 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid2';
 import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
 import { HomeApiResponse } from '../../types/homes-types';
 import HomeCard from '../home-card/home-card';
 import { homesMockData } from '../../homes-mock-data';
@@ -22,15 +23,13 @@ const HomesDisplay: FC = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
-        {Array.from(homesMockData).map(
-          (photo: HomeApiResponse, index: number) => (
-            <Grid key={photo.id}>
-              <Item>
-                <HomeCard photo={photo} />
-              </Item>
-            </Grid>
-          )
-        )}
+        {Array.from(homesMockData).map((photo: HomeApiResponse) => (
+          <Grid key={photo.id}>
+            <Item>
+              <HomeCard photo={photo} />
+            </Item>
+          </Grid>
+        ))}
       </Grid>
     </Box>
   );
@@ -39,9 +38,13 @@ const HomesDisplay: FC = () => {
 const HomesFeed: FC = () => {
   return (
     <div style={{ margin: '3em' }}>
-      <header>
-        <h1>Feed</h1>
-      </header>
+      <Typography
+        variant='body2'
+        color='text.secondary'
+        style={{ marginBottom: '1em' }}
+      >
+        {homesMockData.length} Results{' '}
+      </Typography>
       <HomesDisplay />
     </div>
   );

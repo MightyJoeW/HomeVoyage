@@ -4,6 +4,7 @@ import HomeCard from '../home-card/home-card';
 import { homesMockData } from '../../homes-mock-data';
 import { useParams } from 'react-router';
 import { HomeApiResponse } from '../../types/homes-types';
+import Typography from '@mui/material/Typography';
 
 const HomeInfo = () => {
   const params = useParams();
@@ -19,12 +20,14 @@ const HomeInfo = () => {
 
   return (
     <>
-      <header style={{ textAlign: 'center' }}>
-        <h2>{homeData?.description}</h2>
-      </header>
-      <Box sx={{ margin: '0 auto' }}>
+      <Box sx={{ maxWidth: 345, margin: '3em auto' }}>
         {homeData && <HomeCard photo={homeData} />}
       </Box>
+      <section style={{ textAlign: 'center' }}>
+        <Typography variant='body1' color='text.secondary'>
+          {homeData?.description}
+        </Typography>
+      </section>
     </>
   );
 };

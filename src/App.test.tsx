@@ -1,6 +1,7 @@
 import App from './App';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router';
+import { homesMockData } from './homes-mock-data';
 
 describe('App', () => {
   it('should render the Navbar', () => {
@@ -24,8 +25,11 @@ describe('App', () => {
         <App />
       </BrowserRouter>
     );
-    const homesFeedHeading = screen.getByRole('heading', { level: 1 });
-    expect(homesFeedHeading).toHaveTextContent('Feed');
+    const homesFeedHeading = screen.getByText(
+      `${homesMockData.length} Results`
+    );
+    expect(homesFeedHeading).toBeInTheDocument();
+    expect(homesFeedHeading).toHaveTextContent('10 Results');
   });
 
   it('should render the Footer', () => {

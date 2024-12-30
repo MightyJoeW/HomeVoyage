@@ -1,6 +1,7 @@
 import HomesFeed from './homes-feed';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router';
+import { homesMockData } from '../../homes-mock-data';
 
 describe('HomesFeed', () => {
   render(
@@ -9,8 +10,10 @@ describe('HomesFeed', () => {
     </BrowserRouter>
   );
   it('should render the header text', () => {
-    const homesFeedHeading = screen.getByRole('heading', { level: 1 });
+    const homesFeedHeading = screen.getByText(
+      `${homesMockData.length} Results`
+    );
     expect(homesFeedHeading).toBeInTheDocument();
-    expect(homesFeedHeading).toHaveTextContent('Feed');
+    expect(homesFeedHeading).toHaveTextContent('10 Results');
   });
 });
