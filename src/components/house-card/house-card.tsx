@@ -4,7 +4,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { HomeApiResponse } from '../../types/homes-types';
+import { HouseApiResponse } from '../../types/house-types';
 
 interface PhotoProps {
   pointerEvents: React.CSSProperties['pointerEvents'];
@@ -23,28 +23,33 @@ const enabledLink: PhotoProps = {
   pointerEvents: PhotoPropsEnum.auto,
 };
 
-const HomeCard: FC<{ photo: HomeApiResponse }> = ({ photo }) => {
+const HouseCard: FC<{ house: HouseApiResponse }> = ({ house }) => {
   const location = useLocation();
   const isLinkEnabled = location.pathname === '/' ? enabledLink : disabledLink;
 
   return (
     <Card sx={{ maxWidth: 345, textAlign: 'center', marginBottom: '4px' }}>
-      <Link to={`homes/${photo?.id}`} style={isLinkEnabled}>
+      <Link to={house?.id} style={isLinkEnabled}>
         <CardMedia
           component='img'
-          image={photo.urls.regular}
-          alt={`${photo.alt_description}`}
+          image={house.photo.url}
+          alt={`${house.photo.alt_description}`}
         />
       </Link>
       <CardContent>
         <Typography variant='body2' color='text.secondary'>
-          123 Main St
+          {house.address.line1}
+        </Typography>
+        {house.address.line2 && (
+          <Typography variant='body2' color='text.secondary'>
+            {house.address.line2}
+          </Typography>
+        )}
+        <Typography variant='body2' color='text.secondary'>
+          {house.address.city}, {house.address.state} {house.address.zip}
         </Typography>
         <Typography variant='body2' color='text.secondary'>
-          {'Allen, TX 75013'}
-        </Typography>
-        <Typography variant='body2' color='text.secondary'>
-          3 Beds | 2 Baths | 1,200 Sq Ft | 66 Days on Market
+          {`${house.details.beds} Beds | ${house.details.baths} Baths | ${house.details.sqft} Sq Ft | ${house.details.daysOnMarket} Days on Market`}
         </Typography>
       </CardContent>
       <CardContent>
@@ -54,7 +59,7 @@ const HomeCard: FC<{ photo: HomeApiResponse }> = ({ photo }) => {
           component='div'
           color='text.secondary'
         >
-          {`For Sale ${'$474,900'}`}
+          {`For Sale $${house.price.amount}`}
         </Typography>
         {location.pathname === '/' && (
           <Typography gutterBottom variant='body1' component='div'>
@@ -64,7 +69,7 @@ const HomeCard: FC<{ photo: HomeApiResponse }> = ({ photo }) => {
                 textDecoration: 'none',
                 color: '#0000EE',
               }}
-              to={`homes/${photo?.id}`}
+              to={house?.id}
             >
               {'Show details >'}
             </Link>
@@ -75,13 +80,13 @@ const HomeCard: FC<{ photo: HomeApiResponse }> = ({ photo }) => {
           <a
             target='_blank'
             rel='noreferrer noopener'
-            href={`https://unsplash.com/@${photo?.user?.username}`}
+            href={`https://unsplash.com/@${house.photo?.username}`}
             style={{
               textDecoration: 'none',
               color: '#00000099',
             }}
           >
-            {photo.user.name}
+            {house.photo.name}
           </a>
         </Typography>
       </CardContent>
@@ -89,4 +94,4 @@ const HomeCard: FC<{ photo: HomeApiResponse }> = ({ photo }) => {
   );
 };
 
-export default HomeCard;
+export default HouseCard;

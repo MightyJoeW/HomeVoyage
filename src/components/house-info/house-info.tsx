@@ -1,35 +1,35 @@
 import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
-import HomeCard from '../home-card/home-card';
-import { homesMockData } from '../../homes-mock-data';
+import HouseCard from '../house-card/house-card';
+import { houseMockData } from '../../house-mock-data';
 import { useParams } from 'react-router';
-import { HomeApiResponse } from '../../types/homes-types';
+import { HouseApiResponse } from '../../types/house-types';
 import Typography from '@mui/material/Typography';
 
-const HomeInfo = () => {
+const HouseInfo = () => {
   const params = useParams();
   const id = params.id;
-  const [homeData, setHomeData] = useState<HomeApiResponse | null>(null);
+  const [houseData, setHouseData] = useState<HouseApiResponse | null>(null);
 
   useEffect(() => {
-    const home = homesMockData.find(home => home.id === id);
-    if (home) {
-      setHomeData(home);
+    const house = houseMockData.find(house => house.id === id);
+    if (house) {
+      setHouseData(house);
     }
   }, [id]);
 
   return (
     <>
       <Box sx={{ maxWidth: 345, margin: '3em auto' }}>
-        {homeData && <HomeCard photo={homeData} />}
+        {houseData && <HouseCard house={houseData} />}
       </Box>
       <section style={{ textAlign: 'center' }}>
         <Typography variant='body1' color='text.secondary'>
-          {homeData?.description}
+          {houseData?.details.description}
         </Typography>
       </section>
     </>
   );
 };
 
-export default HomeInfo;
+export default HouseInfo;

@@ -1,13 +1,14 @@
 import {
   Backdrop,
   Box,
-  Button,
   Card,
   CardActions,
   CardContent,
   CardMedia,
   Typography,
 } from '@mui/material';
+
+import { Link } from 'react-router';
 
 const Error = () => {
   return (
@@ -30,9 +31,7 @@ const Error = () => {
         </CardContent>
         <CardActions>
           <Box maxWidth='sm' m='auto'>
-            <Button size='small' href={'/'}>
-              Go to homepage
-            </Button>
+            <Link to='/'>Go to homepage</Link>
           </Box>
         </CardActions>
       </Card>
