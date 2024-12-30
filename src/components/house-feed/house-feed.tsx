@@ -4,9 +4,9 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid2';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-import { HomeApiResponse } from '../../types/homes-types';
-import HomeCard from '../home-card/home-card';
-import { homesMockData } from '../../homes-mock-data';
+import { HouseApiResponse } from '../../types/house-types';
+import HouseCard from '../house-card/house-card';
+import { houseMockData } from '../../house-mock-data';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#fff',
@@ -19,14 +19,14 @@ const Item = styled(Paper)(({ theme }) => ({
   }),
 }));
 
-const HomesDisplay: FC = () => {
+const HouseDisplay: FC = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
-        {Array.from(homesMockData).map((photo: HomeApiResponse) => (
-          <Grid key={photo.id}>
+        {Array.from(houseMockData).map((house: HouseApiResponse) => (
+          <Grid key={house.id}>
             <Item>
-              <HomeCard photo={photo} />
+              <HouseCard house={house} />
             </Item>
           </Grid>
         ))}
@@ -35,7 +35,7 @@ const HomesDisplay: FC = () => {
   );
 };
 
-const HomesFeed: FC = () => {
+const HouseFeed: FC = () => {
   return (
     <div style={{ margin: '3em' }}>
       <Typography
@@ -43,11 +43,11 @@ const HomesFeed: FC = () => {
         color='text.secondary'
         style={{ marginBottom: '1em' }}
       >
-        {homesMockData.length} Results{' '}
+        {houseMockData.length} Results{' '}
       </Typography>
-      <HomesDisplay />
+      <HouseDisplay />
     </div>
   );
 };
 
-export default HomesFeed;
+export default HouseFeed;
