@@ -1,23 +1,45 @@
-import React, { FC } from 'react';
-import { Link } from 'react-router';
-import { Photo } from '../../types/unsplash-response';
+import { FC } from 'react';
+import { Link, useLocation } from 'react-router';
+import { HomeApiResponse } from '../../types/homes-types';
 
-const HomeCard: FC<{ photo: Photo }> = ({ photo }) => {
+interface PhotoProps {
+  pointerEvents: React.CSSProperties['pointerEvents'];
+}
+
+enum PhotoPropsEnum {
+  auto = 'auto',
+  none = 'none',
+}
+
+const disabledLink: PhotoProps = {
+  pointerEvents: PhotoPropsEnum.none,
+};
+
+const enabledLink: PhotoProps = {
+  pointerEvents: PhotoPropsEnum.auto,
+};
+
+const HomeCard: FC<{ photo: HomeApiResponse }> = ({ photo }) => {
+  const location = useLocation();
   return (
     <div style={{ textAlign: 'center', margin: '10px' }}>
-      <Link to={`homes/${photo.id}`}>
+      <Link to={`homes/${photo?.id}`}>
         <img
           className='img'
           alt='photo.description'
-          src={photo.urls.small}
-          style={{ borderRadius: '8px' }}
+          src={
+            location?.pathname === '/'
+              ? photo?.urls?.small
+              : photo?.urls?.regular
+          }
+          style={location.pathname === '/' ? enabledLink : disabledLink}
         />
       </Link>
       <a
         className='credit'
         target='_blank'
         rel='noreferrer noopener'
-        href={`https://unsplash.com/@${photo.user.username}`}
+        href={`https://unsplash.com/@${photo?.user?.username}`}
         style={{
           display: 'block',
           marginTop: '8px',
@@ -25,7 +47,7 @@ const HomeCard: FC<{ photo: Photo }> = ({ photo }) => {
           color: '#000',
         }}
       >
-        {photo.user.name}
+        <strong>Photographer:</strong> {photo?.user?.name}
       </a>
     </div>
   );
