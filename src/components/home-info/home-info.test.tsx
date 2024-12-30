@@ -1,11 +1,14 @@
+import { BrowserRouter } from 'react-router';
 import HomeInfo from './home-info';
 import { render, screen } from '@testing-library/react';
 
 describe('HomeInfo', () => {
-  it('should render the placeholder title', () => {
-    render(<HomeInfo />);
-    expect(
-      screen.getByRole('heading', { name: 'Home info placeholder' })
-    ).toBeInTheDocument();
+  it('should render the HomeInfo content', () => {
+    render(
+      <BrowserRouter>
+        <HomeInfo />
+      </BrowserRouter>
+    );
+    expect(screen.getByRole('heading', { level: 2 })).toBeInTheDocument();
   });
 });

@@ -36,9 +36,9 @@ interface ProfileImage {
 
 interface UserSocial {
   instagram_username: string;
-  portfolio_url: string;
-  twitter_username: string;
-  paypal_email: string;
+  portfolio_url: string | null;
+  twitter_username: string | null;
+  paypal_email: string | null;
 }
 
 interface User {
@@ -49,9 +49,9 @@ interface User {
   first_name: string;
   last_name: string;
   twitter_username: string | null;
-  portfolio_url: string;
-  bio: string;
-  location: string;
+  portfolio_url: string | null;
+  bio: string | null;
+  location: unknown;
   links: UserLinks;
   profile_image: ProfileImage;
   instagram_username: string;
@@ -79,7 +79,7 @@ export interface HomeApiResponse {
   alternative_slugs: Alternative_Slugs;
   created_at: string;
   updated_at: string;
-  promoted_at: string;
+  promoted_at: string | null;
   width: number;
   height: number;
   color: string;
@@ -93,6 +93,7 @@ export interface HomeApiResponse {
   liked_by_user: boolean;
   current_user_collections: string[];
   sponsorship: string | null;
-  topic_submissions: { [key: string]: any }[];
+  topic_submissions: unknown;
+  asset_type: string;
   user: User;
 }

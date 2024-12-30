@@ -1,6 +1,6 @@
 import { HomeApiResponse } from './types/homes-types';
 
-export const homesMockData: HomeApiResponse = [
+export const homesMockData: HomeApiResponse[] = [
   {
     id: '1ddol8rgUH8',
     slug: 'white-house-under-maple-trees-1ddol8rgUH8',

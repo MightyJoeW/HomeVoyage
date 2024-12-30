@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router';
 import { HomeApiResponse } from '../../types/homes-types';
 
 interface PhotoProps {
-  pointerEvents: string;
+  pointerEvents: React.CSSProperties['pointerEvents'];
 }
 
 enum PhotoPropsEnum {
